@@ -29,7 +29,7 @@ $container['view'] = function ($container) {
 
 $container['pdo'] = function() use($container,$host,$mysqldConfig){
     $cfg = $container->get('settings')['db'];
-    return new PDO(sprintf('mysql:host=%s;dbname=%s;charset=utf8', $host, $mysqldConfig['database']), $mysqldConfig['user'], $mysqldConfig['password'], array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_PERSISTENT => true));
+    return new PDO(sprintf('mysql:unix_socket=/var/lib/mysql/mysql.sock;dbname=%s;charset=utf8', $mysqldConfig['database']), $mysqldConfig['user'], $mysqldConfig['password'], array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_PERSISTENT => true));
 };
 
 
